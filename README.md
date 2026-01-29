@@ -1,1 +1,1 @@
-# python-qa-automation-hub
+# python-automated-testing-suite
