@@ -30,4 +30,3 @@ Feature: Plant Management
     And I have a plant named "Dying Plant"
     When I update the water level to 0
     Then the plant should be marked as dead
-```

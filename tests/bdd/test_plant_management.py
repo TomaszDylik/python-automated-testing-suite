@@ -1,12 +1,39 @@
 import pytest
-from pytest_bdd import scenarios, given, when, then, parsers
+from pytest_bdd import scenario, given, when, then, parsers
 import sys
-sys.path.insert(0, '../..')
+import os
+
+# Add parent directory to path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 from app.services.plant_service import PlantService
 from app.services.user_service import UserService
 
-scenarios('../features/plant_management.feature')
+# Scenarios
+@pytest.mark.bdd
+@scenario('features/plant_management.feature', 'Create a new plant')
+def test_create_plant():
+    pass
+
+@pytest.mark.bdd
+@scenario('features/plant_management.feature', 'View plant list')
+def test_view_plant_list():
+    pass
+
+@pytest.mark.bdd
+@scenario('features/plant_management.feature', 'Update plant water level')
+def test_update_water_level():
+    pass
+
+@pytest.mark.bdd
+@scenario('features/plant_management.feature', 'Delete a plant')
+def test_delete_plant():
+    pass
+
+@pytest.mark.bdd
+@scenario('features/plant_management.feature', 'Plant dies when water reaches zero')
+def test_plant_dies():
+    pass
 
 @pytest.fixture
 def plant_service():
