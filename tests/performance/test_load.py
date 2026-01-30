@@ -13,7 +13,7 @@ class TestPerformance:
             start = time.time()
             response = api_session.post(
                 f"{API_URL}/api/auth/login",
-                json={"username": "admin", "password": "admin123"}
+                json={"username": "user1", "password": "user123"}
             )
             end = time.time()
             times.append(end - start)

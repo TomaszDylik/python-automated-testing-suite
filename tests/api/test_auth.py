@@ -9,7 +9,7 @@ class TestAuthAPI:
     def test_login_success(self, api_session):
         response = api_session.post(
             f"{API_URL}/api/auth/login",
-            json={"username": "admin", "password": "admin123"}
+            json={"username": "user1", "password": "user123"}
         )
         
         assert response.status_code == 200
@@ -21,7 +21,7 @@ class TestAuthAPI:
     def test_login_invalid_password(self, api_session):
         response = api_session.post(
             f"{API_URL}/api/auth/login",
-            json={"username": "admin", "password": "wrongpass"}
+            json={"username": "user1", "password": "wrongpass"}
         )
         
         assert response.status_code == 401
@@ -62,7 +62,7 @@ class TestAuthAPI:
     def test_register_duplicate_user(self, api_session):
         response = api_session.post(
             f"{API_URL}/api/auth/register",
-            json={"username": "admin", "password": "password123"}
+            json={"username": "user1", "password": "password123"}
         )
         
         assert response.status_code == 400

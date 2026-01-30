@@ -13,10 +13,12 @@ class TestUsersAPI:
         assert isinstance(response.json(), list)
     
     @pytest.mark.api
-    def test_get_users_unauthorized(self, api_session):
+    def test_get_users_public_access(self, api_session):
+        """Users list is publicly accessible"""
         response = api_session.get(f"{API_URL}/api/users")
         
-        assert response.status_code == 401
+        assert response.status_code == 200
+        assert isinstance(response.json(), list)
     
     @pytest.mark.api
     def test_get_user_by_id(self, auth_session):

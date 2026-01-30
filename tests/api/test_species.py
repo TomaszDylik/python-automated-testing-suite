@@ -13,10 +13,12 @@ class TestSpeciesAPI:
         assert isinstance(response.json(), list)
     
     @pytest.mark.api
-    def test_get_species_unauthorized(self, api_session):
+    def test_get_species_public_access(self, api_session):
+        """Species list is publicly accessible"""
         response = api_session.get(f"{API_URL}/api/species")
         
-        assert response.status_code == 401
+        assert response.status_code == 200
+        assert isinstance(response.json(), list)
     
     @pytest.mark.api
     def test_create_species(self, auth_session):

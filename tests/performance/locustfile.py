@@ -6,8 +6,8 @@ class GreenhouseUser(HttpUser):
     
     def on_start(self):
         response = self.client.post("/api/auth/login", json={
-            "username": "admin",
-            "password": "admin123"
+            "username": "user1",
+            "password": "user123"
         })
         if response.status_code == 200:
             self.token = response.json().get("token")
