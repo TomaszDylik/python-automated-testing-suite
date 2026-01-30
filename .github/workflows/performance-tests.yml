@@ -1,0 +1,71 @@
+name: Performance Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  performance-tests:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: greenhouse
+        ports:
+          - 5432:5432
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install backend
+        run: |
+          cd server
+          npm install
+          npx prisma db push
+          npx prisma generate
+          npm run seed
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/greenhouse
+      
+      - name: Start backend
+        run: |
+          cd server
+          npx ts-node src/server.ts &
+          sleep 15
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/greenhouse
+          JWT_SECRET: test-secret-key
+          PORT: 3001
+      
+      - name: Install test dependencies
+        run: |
+          cd tests
+          pip install -r requirements.txt
+      
+      - name: Run performance tests
+        run: |
+          cd tests
+          pytest performance/ -v -m performance --html=reports/perf-report.html
+      
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: performance-test-report
+          path: tests/reports/

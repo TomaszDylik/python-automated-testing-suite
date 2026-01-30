@@ -1,6 +1,9 @@
 import pytest
 import sys
-sys.path.insert(0, '..')
+import os
+
+# Add parent directory to path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 from app.services.plant_service import PlantService
 from app.services.user_service import UserService

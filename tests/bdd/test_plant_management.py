@@ -4,29 +4,34 @@ import sys
 import os
 
 # Add parent directory to path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 from app.services.plant_service import PlantService
 from app.services.user_service import UserService
 
 # Scenarios
-@scenario('../features/plant_management.feature', 'Create a new plant')
+@pytest.mark.bdd
+@scenario('features/plant_management.feature', 'Create a new plant')
 def test_create_plant():
     pass
 
-@scenario('../features/plant_management.feature', 'View plant list')
+@pytest.mark.bdd
+@scenario('features/plant_management.feature', 'View plant list')
 def test_view_plant_list():
     pass
 
-@scenario('../features/plant_management.feature', 'Update plant water level')
+@pytest.mark.bdd
+@scenario('features/plant_management.feature', 'Update plant water level')
 def test_update_water_level():
     pass
 
-@scenario('../features/plant_management.feature', 'Delete a plant')
+@pytest.mark.bdd
+@scenario('features/plant_management.feature', 'Delete a plant')
 def test_delete_plant():
     pass
 
-@scenario('../features/plant_management.feature', 'Plant dies when water reaches zero')
+@pytest.mark.bdd
+@scenario('features/plant_management.feature', 'Plant dies when water reaches zero')
 def test_plant_dies():
     pass
 

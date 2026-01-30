@@ -4,24 +4,28 @@ import sys
 import os
 
 # Add parent directory to path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 from app.services.user_service import UserService
 
 # Scenarios
-@scenario('../features/user_auth.feature', 'Successful login')
+@pytest.mark.bdd
+@scenario('features/user_auth.feature', 'Successful login')
 def test_successful_login():
     pass
 
-@scenario('../features/user_auth.feature', 'Failed login with wrong password')
+@pytest.mark.bdd
+@scenario('features/user_auth.feature', 'Failed login with wrong password')
 def test_failed_login():
     pass
 
-@scenario('../features/user_auth.feature', 'Register new user')
+@pytest.mark.bdd
+@scenario('features/user_auth.feature', 'Register new user')
 def test_register_new_user():
     pass
 
-@scenario('../features/user_auth.feature', 'Cannot register duplicate username')
+@pytest.mark.bdd
+@scenario('features/user_auth.feature', 'Cannot register duplicate username')
 def test_register_duplicate():
     pass
 
