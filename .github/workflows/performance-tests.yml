@@ -46,10 +46,12 @@ jobs:
       - name: Start backend
         run: |
           cd server
-          npm run dev &
-          sleep 10
+          npx ts-node src/server.ts &
+          sleep 15
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/greenhouse
+          JWT_SECRET: test-secret-key
+          PORT: 3001
       
       - name: Install test dependencies
         run: |
